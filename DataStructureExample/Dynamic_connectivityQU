@@ -1,0 +1,43 @@
+// java implementation QuickFind objects or nodes connected in components
+
+public class UnionfindUF
+{   
+    private static int[] id ;
+    
+    public static void build(int n){
+        id = new int[n];
+        for(int i=0; i < id.length; i++){
+            id[i] = i;
+        }
+    }
+    
+    public static int root(int i){
+        while ( id[i] != i){
+            i = id[i];
+        }
+        return i;
+    }
+    public static boolean connected(int p, int q){
+        return root(p) == root(q);
+    }
+    public static void union(int p, int q){
+        int i = root(p);
+        int j = root(q);
+        id[i] = j;
+    }
+    
+	public static void main(String[] args) {
+	    build(10);
+		union(1,1);
+		union(0,1);
+		union(2,1);
+		union(7,1);
+		union(5,0);
+		union(6,5);
+		union(8,8);
+		union(3,8);
+		union(4,3);
+		union(9,8);
+		System.out.println(connected(6,1));
+	}
+}
