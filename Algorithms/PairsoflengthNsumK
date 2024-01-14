@@ -1,0 +1,26 @@
+def find_pairs_recursive(n, s, current_num=0, current_sum=0, current_digits=[]):
+    if n <= 0 or s <= 0:
+        return []
+
+    if n == 0:
+        if current_sum == s:
+            return [current_num]
+        else:
+            return []
+
+    pairs = []
+    for digit in range(10):
+        new_num = current_num * 10 + digit
+        new_sum = current_sum + digit
+        new_digits = current_digits + [digit]
+        pairs += find_pairs_recursive(n - 1, s, new_num, new_sum, new_digits)
+
+    return pairs
+
+# Input
+n = int(input("Enter the length of the number (n): "))
+s = int(input("Enter the desired sum of digits (s): "))
+
+# Finding and displaying pairs
+result = find_pairs_recursive(n, s)
+print(f"All possible numbers with {n} digits and digits summing up to {s} are: {result}")
